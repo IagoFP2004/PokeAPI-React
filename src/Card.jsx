@@ -27,9 +27,12 @@ export function Card() {
   };
 
   const [pokemons, setPokemons] = useState([]);
+  const [page, setPage] = useState(0);
+  const limit = 9;
 
-  const getPokemons = async () => {
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/?limit=150');
+  const getPokemons = async (page) => {
+    const offset = page * limit;
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`);
     const data = await response.json();
 
     const PokemonsConFoto = await Promise.all(data.results.map(async (pokemon) => {
@@ -49,8 +52,12 @@ export function Card() {
 
 
   useEffect(() => {
-    getPokemons();
-  }, []);
+    getPokemons(page);
+  }, [page]);
+
+  const nextPage = () => setPage(prev => prev + 1);
+  const prevPage = () => setPage(prev => (prev > 0 ? prev - 1 : 0));
+
   return (
     <>
       <div className="content">
@@ -68,6 +75,11 @@ export function Card() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="pagination">
+        <button onClick={prevPage} disabled={page === 0}>Anterior</button>
+        <span>Página {page + 1}</span>
+        <button onClick={nextPage}>Siguiente</button>
       </div>
     </>
   );
