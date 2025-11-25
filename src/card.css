@@ -1,0 +1,27 @@
+.divcard{
+    background-color: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: solid 1px #ccc;
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.divcard img{
+    width: 200px;
+    height: 200px;
+    align-self: center;
+    margin: 0px 20px;
+}
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
